@@ -4,17 +4,29 @@
 
     <div class="transactions">
       <div
-        class="income text-black bg-white border-r-[20px] my-3 border-red-500 flex justify-between p-5 rounded-md py-3"
+        v-for="transaction in transactions"
+        :key="transaction.id"
+        :class="[
+          transaction.amount.includes('-')
+            ? 'expense  border-red-500'
+            : 'income  border-green-500 ',
+          ' text-white bg-black border-r-[20px] my-3 p-5 rounded-sm py-3 flex justify-between',
+        ]"
       >
-        <h4 class="font-bold">Rice</h4>
-        <h4 class="font-bold">-200</h4>
-      </div>
-      <div
-        class="income text-black bg-white border-r-[20px] border-green-500 flex justify-between p-5 rounded-md py-3"
-      >
-        <h4 class="font-bold">Received money</h4>
-        <h4 class="font-bold">200</h4>
+        <h4 class="font-bold">{{ transaction.text }}</h4>
+        <h4 class="font-bold">{{ transaction.amount }}</h4>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { defineProps } from "vue";
+
+const props = defineProps({
+  transactions: {
+    type: Array,
+    required: true,
+  },
+});
+</script>
