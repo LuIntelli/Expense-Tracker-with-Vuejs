@@ -9,7 +9,7 @@
       <Balance :balance="balance" />
       <Record :income="+income" :expense="+expense" />
       <History :transactions="transactions" />
-      <AddTransaction />
+      <AddTransaction @transactionDataSubmitted="handleAddTransactionData" />
     </div>
   </div>
 </template>
@@ -22,6 +22,9 @@ import History from "./components/History.vue";
 import AddTransaction from "./components/AddTransaction.vue";
 
 import { ref, computed } from "vue";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
 
 const transactions = ref([
   {
@@ -71,4 +74,14 @@ const expense = computed(() => {
     }, 0)
     .toFixed(2);
 });
+
+
+// Handling Transaction Data
+const handleAddTransactionData = (transactionData) => {
+  transactions.value.push({
+    id:transactions.length + 1,
+    ...transactionData
+  })
+  toast.success("Transaction Data Added")
+}
 </script>

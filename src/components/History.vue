@@ -10,7 +10,7 @@
           transaction.amount.includes('-')
             ? 'expense  border-red-500'
             : 'income  border-green-500 ',
-          ' text-white bg-black border-r-[20px] my-3 p-5 rounded-sm py-3 flex justify-between',
+          ' text-white bg-black border-r-[20px] my-3 pr-3 pl-1 rounded-sm py-3 flex justify-between',
         ]"
       >
         <h4 class="font-bold">{{ transaction.text }}</h4>
